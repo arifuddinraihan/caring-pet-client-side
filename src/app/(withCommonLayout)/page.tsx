@@ -1,10 +1,10 @@
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import Banner from "./components/page/home/Banner";
 
 export default function Home() {
   return (
     <div>
-      Hello Caring Pet
-      <ThemeSwitcher />
+      <Banner />
     </div>
   );
 }
