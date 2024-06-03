@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { Input, Button, Card, CardFooter, CardBody } from "@nextui-org/react";
+import { Input, Button, Card, CardBody } from "@nextui-org/react";
 
 export type UserData = {
   username: string;
@@ -54,8 +54,8 @@ const RegisterPage = () => {
                 <Input
                   {...register("username")}
                   type="text"
-                  label="Username"
-                  placeholder="User Name"
+                  label="User Name"
+                  placeholder="username"
                   required
                 />
               </div>
@@ -100,60 +100,6 @@ const RegisterPage = () => {
             </form>
           </CardBody>
         </Card>
-
-        {/* <div className="card w-[70%] h-[70%] shadow-xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body py-3">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Full Name</span>
-              </label>
-              <input
-                type="text"
-                {...register("username")}
-                placeholder="User Name"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                {...register("email")}
-                placeholder="Email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                {...register("password")}
-                type="password"
-                placeholder="Password"
-                className="input input-bordered"
-                required
-              />
-            </div>
-
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-accent btn-outline">
-                Register
-              </button>
-            </div>
-            <p className="text-center">
-              Already have an account?{" "}
-              <Link className="text-accent" href="/login">
-                Login
-              </Link>
-            </p>
-          </form>
-        </div> */}
       </div>
     </div>
   );

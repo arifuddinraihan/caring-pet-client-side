@@ -2,6 +2,8 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Switch } from "@nextui-org/react";
+import { MoonStar, SunDimIcon } from "lucide-react";
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -15,10 +17,13 @@ export function ThemeSwitcher() {
 
   return (
     <div>
-      <button onClick={() => setTheme("light")}>Light Mode</button>
-      <button onClick={() => setTheme("dark")}>Dark Mode</button>
-      <br />
-      The current theme is: {theme}
+      <Switch
+        defaultSelected
+        size="lg"
+        color="success"
+        startContent={<SunDimIcon />}
+        endContent={<MoonStar />}
+      ></Switch>
     </div>
   );
 }

@@ -82,7 +82,9 @@ export default function NavBar({ user }: any) {
           </NavbarItem>
         ) : (
           <NavbarItem className="hidden lg:flex">
-            <Link href="/login">Login</Link>
+            <Link href="/login" className="p-4 bg-emerald-300">
+              Login
+            </Link>
           </NavbarItem>
         )}
         <NavbarItem className="hidden lg:flex">

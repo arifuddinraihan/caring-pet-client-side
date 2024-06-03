@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { Input, Button, Card, CardFooter, CardBody } from "@nextui-org/react";
+import { Input, Button, Card, CardBody } from "@nextui-org/react";
 
 type FormValues = {
   email: string;
@@ -69,9 +69,12 @@ const LoginPage = () => {
                   Login
                 </Button>
               </div>
-              <p className="text-center">
+              <p className="text-center mt-5">
                 Don&apos;t have an account?{" "}
-                <Link className="text-accent" href="/register">
+                <Link
+                  className="text-accent underline hover:underline-offset-2"
+                  href="/register"
+                >
                   Create an account
                 </Link>
               </p>
