@@ -1,5 +1,17 @@
+import ContactMainPage from "../components/page/home/ContactMainPage";
+import ContactInfoGlobal from "../components/shared/ContactInfoGlobal";
+import AboutOurTeam from "./components/AboutOurTeam";
+import AboutUsBanner from "./components/AboutUsBanner";
+
 const AboutUsPage = () => {
-  return <div>About Us Page</div>;
+  return (
+    <>
+      <AboutUsBanner />
+      <AboutOurTeam />
+      <ContactMainPage />
+      <ContactInfoGlobal />
+    </>
+  );
 };
 
 export default AboutUsPage;

@@ -1,5 +1,7 @@
+import TipsPage from "./components/TipsPage";
+
 const AdoptionTipsPage = () => {
-  return <div>Adoption Tips Page</div>;
+  return <TipsPage />;
 };
 
 export default AdoptionTipsPage;

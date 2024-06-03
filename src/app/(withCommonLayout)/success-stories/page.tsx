@@ -1,5 +1,7 @@
+import StoriesPage from "./components/StoriesPage";
+
 const SuccessStoriesPage = () => {
-  return <div>Success Stories Page</div>;
+  return <StoriesPage />;
 };
 
 export default SuccessStoriesPage;

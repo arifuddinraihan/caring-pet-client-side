@@ -2,6 +2,7 @@ import Navbar from "@/components/Shared/Navbar/Navbar";
 import { ReactNode } from "react";
 import NavBar from "./components/shared/Navbar";
 import NextUiNavbar from "./components/shared/NextUiNavbar";
+import Footer from "./components/shared/Footer";
 
 const CommonLayout = ({ children }: { children: ReactNode }) => {
   const user = "a";
@@ -11,7 +12,7 @@ const CommonLayout = ({ children }: { children: ReactNode }) => {
       {/* <NextUiNavbar /> */}
       <NavBar user={user}></NavBar>
       <div className="mx-auto container">{children}</div>
-      <p>footer</p>
+      <Footer />
     </div>
   );
 };
