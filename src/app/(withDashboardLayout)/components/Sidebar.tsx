@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const navigation = [
   {
-    href: "javascript:void(0)",
-    name: "Overview",
+    href: "/dashboard",
+    name: "Dashboard",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -22,8 +23,8 @@ const navigation = [
     ),
   },
   {
-    href: "javascript:void(0)",
-    name: "Integration",
+    href: "/dashboard/profile",
+    name: "Profile",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -151,13 +152,13 @@ const navsFooter = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ children }: { children: React.ReactNode }) => {
   return (
-    <>
-      <nav className="fixed top-0 left-0 w-20 h-full border-r bg-white space-y-8">
+    <div className="flex">
+      <nav className="w-20 h-full border-r bg-white space-y-8">
         <div className="flex flex-col h-full">
           <div className="h-20 flex items-center justify-center px-8">
-            <a href="javascript:void(0)" className="flex-none">
+            <Link href="#" className="flex-none">
               <Image
                 src="https://floatui.com/logo-letter.png"
                 width={35}
@@ -165,13 +166,13 @@ const Sidebar = () => {
                 alt="Caring Pet Logo"
                 className="mx-auto"
               />
-            </a>
+            </Link>
           </div>
           <div className="flex-1 flex flex-col h-full">
             <ul className="px-4 text-sm font-medium flex-1">
               {navigation.map((item, idx) => (
                 <li key={idx}>
-                  <a
+                  <Link
                     href={item.href}
                     className="relative flex items-center justify-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150 group"
                   >
@@ -179,7 +180,7 @@ const Sidebar = () => {
                     <span className="absolute left-14 p-1 px-1.5 rounded-md whitespace-nowrap text-xs text-white bg-gray-800 hidden group-hover:inline-block group-focus:hidden duration-150">
                       {item.name}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -187,7 +188,7 @@ const Sidebar = () => {
               <ul className="px-4 pb-4 text-sm font-medium">
                 {navsFooter.map((item, idx) => (
                   <li key={idx}>
-                    <a
+                    <Link
                       href={item.href}
                       className="relative flex items-center justify-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150 group"
                     >
@@ -195,7 +196,7 @@ const Sidebar = () => {
                       <span className="absolute left-14 p-1 px-1.5 rounded-md whitespace-nowrap text-xs text-white bg-gray-800 hidden group-hover:inline-block group-focus:hidden duration-150">
                         {item.name}
                       </span>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -206,7 +207,8 @@ const Sidebar = () => {
           </div>
         </div>
       </nav>
-    </>
+      {children}
+    </div>
   );
 };
 

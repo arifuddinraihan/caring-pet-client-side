@@ -1,10 +1,10 @@
 import React from "react";
+import UserDashboardLayout from "./layout/UserLayout";
 
 const GlobalDashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <h1>Dashboard</h1>
-      {children}
+      <UserDashboardLayout>{children}</UserDashboardLayout>
     </div>
   );
 };

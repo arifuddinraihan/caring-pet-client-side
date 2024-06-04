@@ -63,6 +63,11 @@ export default function NavBar({ user }: any) {
             Adoption Tips
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link href="/dashboard" aria-current="page">
+            Dashboard
+          </Link>
+        </NavbarItem>
         {/* <NavbarItem>
           {user && <Link href={routeMap[user?.role]}>Dashboard</Link>}
         </NavbarItem> */}
