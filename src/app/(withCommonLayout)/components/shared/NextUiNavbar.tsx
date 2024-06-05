@@ -12,80 +12,108 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
-import { DogIcon } from "lucide-react";
+import Image from "next/image";
+import caringPetLogo from "../../../../assets/dog-2-svgrepo-com.png";
+import { usePathname } from "next/navigation";
 
 export default function NextUiNavbar() {
+  const pathname = usePathname();
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    {
+      href: "/",
+      name: "Home",
+    },
+    {
+      href: "/pets",
+      name: "Pets",
+    },
+    {
+      href: "/about-us",
+      name: "About Us",
+    },
+    {
+      href: "/success-stories",
+      name: "Success Stories",
+    },
+    {
+      href: "/adoption-tips",
+      name: "Adoption Tips",
+    },
   ];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent>
+      <NavbarContent justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <NavbarBrand className="flex">
-          <DogIcon />
-          <p className="font-bold text-inherit px-4">CARING PETS</p>
+          <Link color="foreground" href="/">
+            <Image
+              src={caringPetLogo}
+              alt="Caring Pet logo"
+              height={40}
+              width={40}
+            />
+            <p className="font-bold text-inherit px-4">Caring Pets</p>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
+        <NavbarItem isActive={pathname === "/"}>
+          <Link color="foreground" href="/">
+            Home
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
+        <NavbarItem isActive={pathname === "/pets"}>
+          <Link color="foreground" href="/pets">
+            Pets
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
+        <NavbarItem isActive={pathname === "/about-us"}>
+          <Link color="foreground" href="/about-us">
+            About Us
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive={pathname === "/success-stories"}>
+          <Link color="foreground" href="/success-stories">
+            Success Stories
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive={pathname === "/adoption-tips"}>
+          <Link color="foreground" href="/adoption-tips">
+            Adoption Tips
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive={pathname === "/dashboard"}>
+          <Link color="foreground" href="/dashboard">
+            Dashboard
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="/login">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="/register" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
+          <NavbarMenuItem
+            key={`${item.name}-${index}`}
+            isActive={pathname === `${item.href}`}
+          >
+            <Link className="w-full" color="foreground" href={item.href} size="lg">
+              {item.name}
             </Link>
           </NavbarMenuItem>
         ))}

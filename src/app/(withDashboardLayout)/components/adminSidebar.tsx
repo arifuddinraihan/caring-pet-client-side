@@ -93,7 +93,7 @@ const AdminSidebar = ({ children }: { children: React.ReactNode }) => {
       <nav className="fixed top-0 left-0 w-20 h-full border-r bg-white space-y-8 z-10">
         <div className="flex flex-col h-full">
           <div className="h-20 flex items-center justify-center px-8">
-            <Link href="/dashboard" className="flex-none">
+            <Link href="/dashboard/admin" className="flex-none">
               <Image
                 src="https://floatui.com/logo-letter.png"
                 width={35}
