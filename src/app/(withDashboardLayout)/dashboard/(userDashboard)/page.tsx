@@ -1,5 +1,11 @@
+import WelcomeText from "../../components/shared/WelcomeText";
+
 const UserDashboardPage = () => {
-  return <div>Welcome to Dashboard Page.</div>;
+  return (
+    <div className="flex flex-col mx-auto my-auto">
+      <WelcomeText />
+    </div>
+  );
 };
 
 export default UserDashboardPage;

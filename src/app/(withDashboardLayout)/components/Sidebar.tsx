@@ -154,8 +154,8 @@ const navsFooter = [
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex">
-      <nav className="w-20 h-full border-r bg-white space-y-8">
+    <div className="flex min-h-screen">
+      <nav className="fixed top-0 left-0 w-20 h-full border-r bg-white space-y-8 z-10">
         <div className="flex flex-col h-full">
           <div className="h-20 flex items-center justify-center px-8">
             <Link href="#" className="flex-none">
@@ -207,7 +207,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
       </nav>
-      {children}
+      <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden ml-20">{children}</div>
     </div>
   );
 };
