@@ -1,7 +1,7 @@
 import React from "react";
 import AdminDashboardLayout from "./layout/AdminLayout";
 
-const GlobalDashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const AdminDashboardServerLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <AdminDashboardLayout>{children}</AdminDashboardLayout>
@@ -9,4 +9,4 @@ const GlobalDashboardLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default GlobalDashboardLayout;
+export default AdminDashboardServerLayout;

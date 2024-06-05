@@ -1,10 +1,10 @@
-import UserSidebar from "@/app/(withDashboardLayout)/components/Sidebar";
+import AdminSidebar from "@/app/(withDashboardLayout)/components/adminSidebar";
 import React from "react";
 
 const AdminDashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <UserSidebar>{children}</UserSidebar>
+      <AdminSidebar>{children}</AdminSidebar>
     </div>
   );
 };

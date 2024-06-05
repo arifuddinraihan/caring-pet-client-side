@@ -1,7 +1,7 @@
 import React from "react";
 import UserDashboardLayout from "./layout/UserLayout";
 
-const GlobalDashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const UserDashboardServerLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <UserDashboardLayout>{children}</UserDashboardLayout>
@@ -9,4 +9,4 @@ const GlobalDashboardLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default GlobalDashboardLayout;
+export default UserDashboardServerLayout;
