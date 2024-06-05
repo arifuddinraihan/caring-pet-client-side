@@ -1,6 +1,6 @@
 import { Spinner } from "@nextui-org/react";
 
-const LoadingPage = () => {
+const DashboardLoadingPage = () => {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-[90%] mx-auto">
@@ -8,6 +8,6 @@ const LoadingPage = () => {
       </div>
     </div>
   );
-};
+}
 
-export default LoadingPage;
+export default DashboardLoadingPage;
