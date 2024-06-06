@@ -1,103 +1,23 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { Input, Button, Card, CardBody } from "@nextui-org/react";
-
-export type UserData = {
-  username: string;
-  email: string;
-  password: string;
-};
+import { Card, CardBody } from "@nextui-org/react";
+import RegisterForm from "./RegisterForm";
 
 const RegisterPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserData>();
-
-  const onSubmit = async (data: UserData) => {
-    console.log(data);
-
-    try {
-    } catch (err: any) {
-      console.error(err.message);
-      throw new Error(err.message);
-    }
-  };
-
   return (
     <div className="my-10">
       <h1 className="text-center text-4xl mb-5">
         Register <span className="text-accent">Now</span>
       </h1>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 justify-items-center">
         <div>
-          <Image
-            src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?t=st=1710081713~exp=1710085313~hmac=f637c194f1f143e63a84950cbf978997453777c872adf4aebbbecdaa445601a1&w=740"
-            width={500}
-            height={200}
-            alt="login page"
-            className="w-full h-[85%]"
-          />
+          <iframe
+            className="w-80 h-80 md:w-[650px] md:h-[650px]"
+            src="https://lottie.host/embed/f0d04434-d06d-4028-a490-062f51a61c92/tAr3umi5pW.json"
+          ></iframe>
         </div>
 
-        <Card className="card w-[70%] h-[80%] shadow-xl bg-base-100">
+        <Card className="card w-[80%] shadow-xl bg-base-100 text-center md:mt-20">
           <CardBody>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col text-center"
-            >
-              <div className="mt-5">
-                <Input
-                  {...register("username")}
-                  type="text"
-                  label="User Name"
-                  placeholder="username"
-                  required
-                />
-              </div>
-              <div className="mt-5">
-                <Input
-                  {...register("email")}
-                  type="email"
-                  label="Email"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-
-              <div className="mt-5">
-                <Input
-                  {...register("password")}
-                  type="password"
-                  label="Password"
-                  placeholder="*********"
-                  required
-                />
-              </div>
-
-              <div className="form-control mt-6">
-                <Button
-                  color="secondary"
-                  type="submit"
-                  className="btn btn-accent btn-outline"
-                >
-                  Register
-                </Button>
-              </div>
-              <p className="text-center mt-5">
-                Already have an account?{" "}
-                <Link
-                  className="text-accent underline hover:underline-offset-2"
-                  href="/login"
-                >
-                  Login Here
-                </Link>
-              </p>
-            </form>
+            <RegisterForm />
           </CardBody>
         </Card>
       </div>

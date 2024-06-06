@@ -19,6 +19,8 @@ export function ThemeSwitcher() {
     <div>
       <Switch
         defaultSelected
+        isSelected={theme === "dark" ? true : false}
+        onValueChange={(e) => setTheme(e ? "dark" : "light")}
         size="lg"
         color="success"
         startContent={<SunDimIcon />}

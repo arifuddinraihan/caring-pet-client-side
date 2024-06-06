@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import caringPetLogo from "../../../../assets/dog-2-svgrepo-com.png";
 import { usePathname } from "next/navigation";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 export default function NextUiNavbar() {
   const pathname = usePathname();
@@ -59,7 +60,9 @@ export default function NextUiNavbar() {
               height={40}
               width={40}
             />
-            <p className="font-bold text-inherit px-4">Caring Pets</p>
+            <p className="hidden lg:flex font-bold text-inherit px-4">
+              Caring Pets
+            </p>
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -97,6 +100,9 @@ export default function NextUiNavbar() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
+        <NavbarItem>
+          <ThemeSwitcher />
+        </NavbarItem>
         <NavbarItem className="hidden lg:flex">
           <Link href="/login">Login</Link>
         </NavbarItem>
@@ -112,7 +118,12 @@ export default function NextUiNavbar() {
             key={`${item.name}-${index}`}
             isActive={pathname === `${item.href}`}
           >
-            <Link className="w-full" color="foreground" href={item.href} size="lg">
+            <Link
+              className="w-full"
+              color="foreground"
+              href={item.href}
+              size="lg"
+            >
               {item.name}
             </Link>
           </NavbarMenuItem>

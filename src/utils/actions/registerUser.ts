@@ -1,17 +1,38 @@
 "use Server";
 
-export const registerUser = async (data: any) => {
+export const registerUser = async (pre: FormData, formData: FormData) => {
   // ------------- MUST ADD THE BACKEND URL FOR REGISTER USER ------------- //
-  const res = await fetch(``, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(data),
-    cache: "no-store",
-  });
-
-  const userInfo = await res.json();
-
-  return userInfo;
+  try {
+    const formattedData = JSON.stringify(Object?.fromEntries(formData));
+    const res = await fetch(`${process.env.BACKEND_URL}/register`, {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: formattedData,
+    });
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
+
+// export async function signUpUser(pre: FormData, formData: FormData) {
+//   try {
+//     const formattedData = JSON.stringify(Object?.fromEntries(formData));
+//     const res = await fetch(`${process.env.serverUrl}/auth/register`, {
+//       method: "POST",
+//       headers: {
+//         "Content-type": "application/json",
+//       },
+//       body: formattedData,
+//     });
+//     const data = await res.json();
+//     return data;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
