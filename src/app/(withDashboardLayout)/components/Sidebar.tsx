@@ -86,7 +86,7 @@ const navigation = [
 
 const navsFooter = [
   {
-    href: "javascript:void(0)",
+    href: "#",
     name: "Logout",
     icon: (
       <svg

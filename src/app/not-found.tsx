@@ -22,12 +22,6 @@ const NotFoundPage = () => {
               >
                 Go back
               </Link>
-              {/* <a
-                href="javascript:void(0)"
-                className="block py-2 px-4 text-gray-700 hover:bg-gray-50 font-medium duration-150 active:bg-gray-100 border rounded-lg"
-              >
-                Contact support
-              </a> */}
             </div>
           </div>
         </div>

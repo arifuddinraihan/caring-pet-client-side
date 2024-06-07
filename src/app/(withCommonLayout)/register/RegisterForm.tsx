@@ -4,6 +4,10 @@ import { useForm } from "react-hook-form";
 import { Input, Button } from "@nextui-org/react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { createRef, useEffect } from "react";
+import { useFormState } from "react-dom";
+import { registerUser } from "../action/authActions";
+import ActionSubmitButton from "../components/submitButton/ActionSubmitButton";
 
 export type UserData = {
   username: string;
@@ -12,48 +16,63 @@ export type UserData = {
 };
 
 const RegisterForm = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<UserData>({
-    defaultValues: {
-      username: "arifuddinraihan",
-      email: "arifuddinraihan@gmail.com",
-      password: "asd123",
-    },
-  });
+  const ref = createRef<HTMLFormElement>();
+  const [state, formAction] = useFormState(registerUser, null);
 
-  const onSubmit = async (data: UserData) => {
-    // console.log(data);
-    // toast.success("Sonner Test");
-    // reset();
+  useEffect(() => {
+    console.log(state);
+    // if (state && state.success) {
+    //   console.log(state);
+    //   toast.success("Sonner Test");
+    //   ref.current?.reset();
+    // }
+  }, [state]);
 
-    try {
-    } catch (err: any) {
-      console.error(err.message);
-      throw new Error(err.message);
-    }
-  };
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   reset,
+  //   formState: { errors },
+  // } = useForm<UserData>({
+  //   defaultValues: {
+  //     username: "arifuddinraihan",
+  //     email: "arifuddinraihan@gmail.com",
+  //     password: "asd123",
+  //   },
+  // });
+
+  // const onSubmit = async (data: UserData) => {
+  //   console.log(data);
+  //   toast.success("Sonner Test");
+  //   reset();
+
+  //   try {
+  //   } catch (err: any) {
+  //     console.error(err.message);
+  //     throw new Error(err.message);
+  //   }
+  // };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      action={formAction}
+      // onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col text-center"
     >
       <div className="mt-5">
         <Input
-          {...register("username")}
+          // {...register("username")}
           type="text"
-          label="User Name"
-          placeholder="username"
+          name="name"
+          label="Name"
+          placeholder="name"
           required
         />
       </div>
       <div className="mt-5">
         <Input
-          {...register("email")}
+          // {...register("email")}
+          name="email"
           type="email"
           label="Email"
           placeholder="Enter your email"
@@ -63,7 +82,8 @@ const RegisterForm = () => {
 
       <div className="mt-5">
         <Input
-          {...register("password")}
+          // {...register("password")}
+          name="password"
           type="password"
           label="Password"
           placeholder="*********"
@@ -72,13 +92,7 @@ const RegisterForm = () => {
       </div>
 
       <div className="form-control mt-6">
-        <Button
-          color="secondary"
-          type="submit"
-          className="btn btn-accent btn-outline"
-        >
-          Register
-        </Button>
+        <ActionSubmitButton>Register</ActionSubmitButton>
       </div>
       <p className="text-center mt-5">
         Already have an account?{" "}
