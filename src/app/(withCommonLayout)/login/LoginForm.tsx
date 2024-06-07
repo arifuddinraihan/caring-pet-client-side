@@ -1,56 +1,63 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { Input, Button } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import Link from "next/link";
+import ActionSubmitButton from "../components/submitButton/ActionSubmitButton";
+import { createRef, useEffect } from "react";
+import { useFormState } from "react-dom";
+import { loginUser } from "../action/authActions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-type FormValues = {
+export type TUserLoginFormValues = {
   email: string;
   password: string;
 };
 
-const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
-
-  const onSubmit = async (data: FormValues) => {
-    console.log(data);
-  };
+export default function LoginForm() {
+  const ref = createRef<HTMLFormElement>();
+  const router = useRouter();
+  const [state, formAction] = useFormState(loginUser, null);
+  useEffect(() => {
+    if (state && state?.success) {
+      toast.success(state?.message, { id: 1, duration: 2000 });
+      ref.current?.reset();
+      router.push("/");
+      // window.location.href = "/home";
+    }
+    if (state && !state?.success) {
+      toast.error(state?.message, { id: 1, duration: 2000 });
+    }
+  }, [router, state, ref]);
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      ref={ref}
+      action={formAction}
       className="flex flex-col gap-4 my-2 text-center"
     >
       <div className="form-control mt-5">
         <Input
-          {...register("email")}
+          name="email"
           type="email"
           label="Email"
           placeholder="Enter your email"
+          required
         />
       </div>
 
       <div className="form-control">
         <Input
-          {...register("password")}
+          name="password"
           type="password"
           label="Password"
           placeholder="*********"
+          required
         />
       </div>
 
       <div className="form-control mt-6">
-        <Button
-          color="success"
-          type="submit"
-          className="btn btn-accent btn-outline"
-        >
-          Login
-        </Button>
+        <ActionSubmitButton>Login</ActionSubmitButton>
       </div>
       <p className="text-center mt-5">
         Don&apos;t have an account?{" "}
@@ -63,6 +70,4 @@ const LoginForm = () => {
       </p>
     </form>
   );
-};
-
-export default LoginForm;
+}

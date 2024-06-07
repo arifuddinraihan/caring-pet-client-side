@@ -1,15 +1,43 @@
-"use Server";
+"use server";
 
-export const registerUser = async (pre: FormData, formData: FormData) => {
-  // ------------- MUST ADD THE BACKEND URL FOR REGISTER USER ------------- //
+import { cookies } from "next/headers";
+
+export async function loginUser(pre: FormData, formData: FormData) {
   try {
     const formattedData = JSON.stringify(Object?.fromEntries(formData));
-    const severUrl = process.env.LOCAL_URL
-    console.log(severUrl)
-    const res = await fetch(`${process.env.LOCAL_URL}/register`, {
+    const severUrl = process.env.LOCAL_SERVER_URL;
+    const res = await fetch(`${severUrl}/login`, {
+      method: "POST",
+      cache: "no-cache",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: formattedData,
+    });
+    const data = await res.json();
+    // console.log(data);
+    if (data.success) {
+      // console.log(data.success);
+      cookies().set("token", data.data.token);
+      // cookies().set("refreshToken", data.data.refreshToken);
+      return data;
+    }
+
+    // return {};
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function registerUser(pre: FormData, formData: FormData) {
+  try {
+    const formattedData = JSON.stringify(Object?.fromEntries(formData));
+    const severUrl = process.env.LOCAL_SERVER_URL;
+    const res = await fetch(`${severUrl}/register`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-type": "application/json",
       },
       body: formattedData,
     });
@@ -18,21 +46,6 @@ export const registerUser = async (pre: FormData, formData: FormData) => {
   } catch (error) {
     throw error;
   }
-};
+}
 
-export const loginUser = async (pre: FormData, formData: FormData) => {
-  // MUST ADD THE BACKEND URL FOR LOGIN USER
-  const formattedData = JSON.stringify(Object?.fromEntries(formData));
-  const res = await fetch(`${process.env.BACKEND_URL}/login`, {
-    method: "POST",
-    cache: "no-cache",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: formattedData,
-  });
 
-  const userInfo = await res.json();
-
-  return userInfo;
-};

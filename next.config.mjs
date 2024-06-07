@@ -8,6 +8,9 @@ const nextConfig = {
       },
     ],
   },
+  env : {
+    LOCAL_SERVER_URL : process.env.LOCAL_URL
+  }
 };
 
 export default nextConfig;

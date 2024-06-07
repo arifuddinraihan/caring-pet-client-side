@@ -1,15 +1,15 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { Input, Button } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { createRef, useEffect } from "react";
 import { useFormState } from "react-dom";
-import { registerUser } from "../action/authActions";
 import ActionSubmitButton from "../components/submitButton/ActionSubmitButton";
+import { registerUser } from "../action/authActions";
+import { useRouter } from "next/navigation";
 
-export type UserData = {
+export type TUserRegisterData = {
   username: string;
   email: string;
   password: string;
@@ -17,51 +17,28 @@ export type UserData = {
 
 const RegisterForm = () => {
   const ref = createRef<HTMLFormElement>();
+  const router = useRouter();
   const [state, formAction] = useFormState(registerUser, null);
 
   useEffect(() => {
-    console.log(state);
-    // if (state && state.success) {
-    //   console.log(state);
-    //   toast.success("Sonner Test");
-    //   ref.current?.reset();
-    // }
-  }, [state]);
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   reset,
-  //   formState: { errors },
-  // } = useForm<UserData>({
-  //   defaultValues: {
-  //     username: "arifuddinraihan",
-  //     email: "arifuddinraihan@gmail.com",
-  //     password: "asd123",
-  //   },
-  // });
-
-  // const onSubmit = async (data: UserData) => {
-  //   console.log(data);
-  //   toast.success("Sonner Test");
-  //   reset();
-
-  //   try {
-  //   } catch (err: any) {
-  //     console.error(err.message);
-  //     throw new Error(err.message);
-  //   }
-  // };
+    // console.log(state);
+    if (state && state?.success) {
+      toast.success("Successfully registered your account!", {
+        id: 1,
+        duration: 2000,
+      });
+      ref.current?.reset();
+      router.push("/login");
+    }
+    if (state && !state?.success) {
+      toast.error(state?.message, { id: 1, duration: 2000 });
+    }
+  }, [router, state, ref]);
 
   return (
-    <form
-      action={formAction}
-      // onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col text-center"
-    >
+    <form ref={ref} action={formAction} className="flex flex-col text-center">
       <div className="mt-5">
         <Input
-          // {...register("username")}
           type="text"
           name="name"
           label="Name"
@@ -71,7 +48,6 @@ const RegisterForm = () => {
       </div>
       <div className="mt-5">
         <Input
-          // {...register("email")}
           name="email"
           type="email"
           label="Email"
@@ -82,7 +58,6 @@ const RegisterForm = () => {
 
       <div className="mt-5">
         <Input
-          // {...register("password")}
           name="password"
           type="password"
           label="Password"
