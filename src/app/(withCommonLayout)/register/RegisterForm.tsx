@@ -9,19 +9,12 @@ import ActionSubmitButton from "../components/submitButton/ActionSubmitButton";
 import { registerUser } from "../action/authActions";
 import { useRouter } from "next/navigation";
 
-export type TUserRegisterData = {
-  username: string;
-  email: string;
-  password: string;
-};
-
 const RegisterForm = () => {
   const ref = createRef<HTMLFormElement>();
   const router = useRouter();
   const [state, formAction] = useFormState(registerUser, null);
 
   useEffect(() => {
-    // console.log(state);
     if (state && state?.success) {
       toast.success("Successfully registered your account!", {
         id: 1,
@@ -33,7 +26,8 @@ const RegisterForm = () => {
     if (state && !state?.success) {
       toast.error(state?.message, { id: 1, duration: 2000 });
     }
-  }, [router, state, ref]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, router]);
 
   return (
     <form ref={ref} action={formAction} className="flex flex-col text-center">
@@ -52,6 +46,16 @@ const RegisterForm = () => {
           type="email"
           label="Email"
           placeholder="Enter your email"
+          required
+        />
+      </div>
+
+      <div className="mt-5">
+        <Input
+          name="profilePhoto"
+          type="text"
+          label="Profile Photo"
+          placeholder="Enter your Profile Photo link here"
           required
         />
       </div>

@@ -14,10 +14,29 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import caringPetLogo from "../../../../assets/dog-2-svgrepo-com.png";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { useAuth } from "@/lib/AuthProvider";
+import { logOut } from "../../action/authActions";
 
-export default function NextUiNavbar() {
+export default function NextUiNavbar({ user }: any) {
+  // console.log(user);
+
+  const router = useRouter();
+  const { setUser } = useAuth();
+
+  const routeMap: Record<string, string> = {
+    USER: "/dashboard",
+    ADMIN: "/dashboard/admin",
+    SUPER_ADMIN: "/dashboard/admin",
+  };
+
+  const logOutUser = async () => {
+    await logOut();
+    setUser(null);
+    router.push("/login");
+  };
+
   const pathname = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -26,10 +45,6 @@ export default function NextUiNavbar() {
     {
       href: "/",
       name: "Home",
-    },
-    {
-      href: "/pets",
-      name: "Pets",
     },
     {
       href: "/about-us",
@@ -74,9 +89,11 @@ export default function NextUiNavbar() {
           </Link>
         </NavbarItem>
         <NavbarItem isActive={pathname === "/pets"}>
-          <Link color="foreground" href="/pets">
-            Pets
-          </Link>
+          {user && user.role === "USER" && (
+            <Link color="foreground" href="/pets">
+              Pets
+            </Link>
+          )}
         </NavbarItem>
         <NavbarItem isActive={pathname === "/about-us"}>
           <Link color="foreground" href="/about-us">
@@ -93,24 +110,39 @@ export default function NextUiNavbar() {
             Adoption Tips
           </Link>
         </NavbarItem>
-        <NavbarItem isActive={pathname === "/dashboard"}>
-          <Link color="foreground" href="/dashboard">
-            Dashboard
-          </Link>
+        <NavbarItem>
+          {user && <Link href={routeMap[user?.role]}>Dashboard</Link>}
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="/register" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
+        {user ? (
+          <>
+            <NavbarItem>
+              <Button
+                onClick={logOutUser}
+                as={Button}
+                color="primary"
+                variant="flat"
+              >
+                Logout
+              </Button>
+            </NavbarItem>
+          </>
+        ) : (
+          <>
+            <NavbarItem className="hidden lg:flex">
+              <Link href="/login">Login</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Button as={Link} color="primary" href="/register" variant="flat">
+                Sign Up
+              </Button>
+            </NavbarItem>
+          </>
+        )}
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
@@ -128,6 +160,20 @@ export default function NextUiNavbar() {
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem isActive={pathname === "/pets"}>
+          {user && user.role === "USER" && (
+            <Link className="w-full" color="foreground" href="/pets" size="lg">
+              Pets
+            </Link>
+          )}
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          {user && (
+            <Link href={routeMap[user?.role]} className="w-full" size="lg">
+              Dashboard
+            </Link>
+          )}
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );

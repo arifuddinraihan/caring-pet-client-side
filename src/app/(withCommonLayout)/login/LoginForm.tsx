@@ -9,26 +9,25 @@ import { loginUser } from "../action/authActions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export type TUserLoginFormValues = {
-  email: string;
-  password: string;
-};
-
-export default function LoginForm() {
+const LoginForm = () => {
   const ref = createRef<HTMLFormElement>();
   const router = useRouter();
   const [state, formAction] = useFormState(loginUser, null);
+
   useEffect(() => {
     if (state && state?.success) {
-      toast.success(state?.message, { id: 1, duration: 2000 });
+      toast.success("Successfully Logged in your account!", {
+        id: 2,
+        duration: 2000,
+      });
       ref.current?.reset();
       router.push("/");
-      // window.location.href = "/home";
     }
     if (state && !state?.success) {
-      toast.error(state?.message, { id: 1, duration: 2000 });
+      toast.error(state?.message, { id: 2, duration: 2000 });
     }
-  }, [router, state, ref]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, router]);
 
   return (
     <form
@@ -60,7 +59,7 @@ export default function LoginForm() {
         <ActionSubmitButton>Login</ActionSubmitButton>
       </div>
       <p className="text-center mt-5">
-        Don&apos;t have an account?{" "}
+        Don{"'"}t have an account?{" "}
         <Link
           className="text-accent underline hover:underline-offset-2"
           href="/register"
@@ -70,4 +69,6 @@ export default function LoginForm() {
       </p>
     </form>
   );
-}
+};
+
+export default LoginForm;

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import caringPetLogo from "../../../assets/dog-2-svgrepo-com.png";
 
 const navigation = [
   {
@@ -61,7 +62,7 @@ const navigation = [
         />
       </svg>
     ),
-  }
+  },
 ];
 
 const navsFooter = [
@@ -93,11 +94,11 @@ const AdminSidebar = ({ children }: { children: React.ReactNode }) => {
       <nav className="fixed top-0 left-0 w-20 h-full border-r bg-white space-y-8 z-10">
         <div className="flex flex-col h-full">
           <div className="h-20 flex items-center justify-center px-8">
-            <Link href="/dashboard/admin" className="flex-none">
+            <Link href="/" className="flex-none">
               <Image
-                src="https://floatui.com/logo-letter.png"
-                width={35}
-                height={35}
+                src={caringPetLogo}
+                width={40}
+                height={40}
                 alt="Caring Pet Logo"
                 className="mx-auto"
               />
