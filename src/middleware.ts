@@ -7,7 +7,7 @@ type Role = keyof typeof roleBasedPrivateRoutes;
 const AuthRoutes = ["/login", "/register"];
 
 const roleBasedPrivateRoutes = {
-  USER: [/^\/dashboard$/, "/pets"],
+  USER: [/^\/dashboard$/, "/pets", "my-profile", "my-pets", "update-password"],
   ADMIN: [/^\/dashboard\/admin/],
   SUPER_ADMIN: [/^\/dashboard\/admin/],
 };
