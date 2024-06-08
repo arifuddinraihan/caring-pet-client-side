@@ -1,6 +1,6 @@
 import WelcomeUserInfo from "./WelcomeUserInfo";
 
-const WelcomeText = () => {
+const WelcomeText = async () => {
   return (
     <section className="flex flex-col-reverse gap-10 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8">
       <div className="text-center space-y-4">
