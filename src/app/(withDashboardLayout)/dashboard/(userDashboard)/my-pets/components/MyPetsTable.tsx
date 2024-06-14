@@ -25,7 +25,7 @@ const columns = [
   { name: "STATUS", uid: "status" },
 ];
 
-export default function MyPetsTable({ data }: any) {
+export default function MyPetsTable({ userAdoptionsData }: any) {
   const renderCell = React.useCallback((pet: any, columnKey: React.Key) => {
     const cellValue = pet[columnKey as any];
 
