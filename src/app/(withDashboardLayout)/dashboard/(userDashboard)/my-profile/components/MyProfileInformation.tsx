@@ -1,6 +1,7 @@
 import { Button } from "@nextui-org/react";
 import { cookies } from "next/headers";
 import Image from "next/image";
+import EditMyInfoModal from "./profileModal/EditMyInfoModal";
 
 const MyProfileInformation = async () => {
   const res = await fetch(`${process.env.LOCAL_URL}/profile/me`, {
@@ -29,6 +30,7 @@ const MyProfileInformation = async () => {
           <h3 className="text-xl text-gray-900">{name ? name : ""}</h3>
           <p className="text-gray-400 text-sm mt-1">{email ? email : ""}</p>
         </div>
+        {/* <EditMyInfoModal /> */}
         <Button className="mb-4" type="button" size="md">
           Edit Profile
         </Button>

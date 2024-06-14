@@ -23,7 +23,7 @@ const MyPetsPage = async () => {
 
   const { data: userAdoptionsData } = await myAdoptions.json();
 
-  console.log(userAdoptionsData);
+  // console.log(userAdoptionsData);
 
   return (
     <section className="flex flex-col gap-10 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8 my-auto">
@@ -33,7 +33,9 @@ const MyPetsPage = async () => {
           <span className="text-indigo-600"> Your Pets Listing</span>
         </h1>
       </div>
-      <MyPetsTable userAdoptionsData={userAdoptionsData} />
+      <div className="hidden md:block">
+        <MyPetsTable userAdoptionsData={userAdoptionsData} />
+      </div>
     </section>
   );
 };
