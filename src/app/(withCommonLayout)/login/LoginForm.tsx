@@ -10,7 +10,6 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const ref = createRef<HTMLFormElement>();
   const router = useRouter();
   const [state, formAction] = useFormState(loginUser, null);
 
@@ -20,7 +19,6 @@ const LoginForm = () => {
         id: 2,
         duration: 2000,
       });
-      ref.current?.reset();
       router.push("/");
     }
     if (state && !state?.success) {
@@ -30,11 +28,7 @@ const LoginForm = () => {
   }, [state, router]);
 
   return (
-    <form
-      ref={ref}
-      action={formAction}
-      className="flex flex-col gap-4 my-2 text-center"
-    >
+    <form action={formAction} className="flex flex-col gap-4 my-2 text-center">
       <div className="form-control mt-5">
         <Input
           name="email"

@@ -1,20 +1,12 @@
-import { Button } from "@nextui-org/react";
-import { cookies } from "next/headers";
+"use client";
+
+import { Button, ModalHeader, useDisclosure } from "@nextui-org/react";
 import Image from "next/image";
-import EditMyInfoModal from "./profileModal/EditMyInfoModal";
+import CustomModal from "../../../../components/shared/CustomModal";
+import UpdateUserInfoForm from "./UpdateUserInfoForm";
 
-const MyProfileInformation = async () => {
-  const res = await fetch(`${process.env.LOCAL_URL}/profile/me`, {
-    headers: {
-      AUTHORIZATION: cookies().get("token")?.value || "",
-    },
-  });
-
-  const { data: user } = await res.json();
-
-  const { name, profilePhoto, email } = user;
-
-  //   console.log(user);
+const MyProfileInformation = ({ name, profilePhoto, email }: any) => {
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   return (
     <div className="my-12 flex flex-col gap-2 justify-items-center">
@@ -30,8 +22,28 @@ const MyProfileInformation = async () => {
           <h3 className="text-xl text-gray-900">{name ? name : ""}</h3>
           <p className="text-gray-400 text-sm mt-1">{email ? email : ""}</p>
         </div>
-        {/* <EditMyInfoModal /> */}
-        <Button className="mb-4" type="button" size="md">
+        <CustomModal size="md" isOpen={isOpen} onOpenChange={onOpenChange}>
+          <div className="py-6">
+            <ModalHeader className="flex flex-col gap-1 text-center">
+              Edit your information
+            </ModalHeader>
+
+            <UpdateUserInfoForm
+              name={name}
+              email={email}
+              profilePhoto={profilePhoto}
+              onClose={onClose}
+            />
+          </div>
+        </CustomModal>
+        <Button
+          className="mb-4"
+          type="button"
+          size="md"
+          color="primary"
+          variant="shadow"
+          onClick={onOpen}
+        >
           Edit Profile
         </Button>
       </div>

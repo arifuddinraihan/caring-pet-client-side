@@ -10,7 +10,6 @@ import { registerUser } from "../action/authActions";
 import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
-  const ref = createRef<HTMLFormElement>();
   const router = useRouter();
   const [state, formAction] = useFormState(registerUser, null);
 
@@ -20,17 +19,16 @@ const RegisterForm = () => {
         id: 1,
         duration: 2000,
       });
-      ref.current?.reset();
       router.push("/login");
     }
     if (state && !state?.success) {
       toast.error(state?.message, { id: 1, duration: 2000 });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, router]);
 
   return (
-    <form ref={ref} action={formAction} className="flex flex-col text-center">
+    <form action={formAction} className="flex flex-col text-center">
       <div className="mt-5">
         <Input
           type="text"

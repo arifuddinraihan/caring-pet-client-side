@@ -35,7 +35,16 @@ export async function updateUserPassword(pre: FormData, formData: FormData) {
 
 export async function updateUserProfile(pre: FormData, formData: FormData) {
   try {
-    const formattedData = JSON.stringify(formData);
+    const newFormData = {
+      ...Object?.fromEntries(formData),
+      name: Object?.fromEntries(formData).name,
+      email: Object?.fromEntries(formData).email,
+      profilePhoto: Object?.fromEntries(formData).profilePhoto,
+    };
+
+    const formattedData = JSON.stringify(newFormData);
+
+    // console.log(formattedData);
 
     const token = cookies().get("token")?.value;
     const headers = new Headers();
