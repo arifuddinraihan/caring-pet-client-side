@@ -12,10 +12,10 @@ const AdminSidebar = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const { setUser } = useAuth();
 
-  const logOutUser = async () => {
-    await logOut();
-    setUser(null);
+  const logOutUser = () => {
     router.push("/login");
+    logOut();
+    setUser(null);
   };
 
   return (

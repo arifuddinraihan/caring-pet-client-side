@@ -1,5 +1,7 @@
 import { cookies } from "next/headers";
 import MyPetsTable from "./components/MyPetsTable";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const MyPetsPage = async () => {
   const myProfile = await fetch(`${process.env.LOCAL_URL}/profile/me`, {
@@ -9,6 +11,10 @@ const MyPetsPage = async () => {
   });
 
   const { data: user } = await myProfile.json();
+
+  if (!user) {
+    redirect("/login");
+  }
 
   const { id } = user;
 
@@ -34,7 +40,20 @@ const MyPetsPage = async () => {
         </h1>
       </div>
       <div className="hidden md:block">
-        <MyPetsTable userAdoptionsData={userAdoptionsData} />
+        {id && userAdoptionsData.length > 0 ? (
+          <MyPetsTable userAdoptionsData={userAdoptionsData} />
+        ) : (
+          <p>
+            Your pet listing is empty visit
+            <Link
+              href="/pets"
+              className="inline-block py-2 px-4 text-white font-medium bg-gray-800 duration-150 hover:bg-gray-700 active:bg-gray-900 rounded-lg shadow-md hover:shadow-none"
+            >
+              pets page
+            </Link>{" "}
+            to list your new pet.
+          </p>
+        )}
       </div>
     </section>
   );

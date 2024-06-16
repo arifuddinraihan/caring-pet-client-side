@@ -10,22 +10,25 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const router = useRouter();
   const [state, formAction] = useFormState(loginUser, null);
+  const ref = createRef<HTMLFormElement>();
+  const router = useRouter();
 
   useEffect(() => {
     if (state && state?.success) {
+      // console.log("from login form =>", state);
       toast.success("Successfully Logged in your account!", {
         id: 2,
         duration: 2000,
       });
+      ref.current?.reset();
       router.push("/");
     }
     if (state && !state?.success) {
       toast.error(state?.message, { id: 2, duration: 2000 });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, router]);
+  }, [state]);
 
   return (
     <form action={formAction} className="flex flex-col gap-4 my-2 text-center">

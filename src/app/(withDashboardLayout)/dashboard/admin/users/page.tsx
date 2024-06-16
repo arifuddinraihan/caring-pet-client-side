@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import AllUsersTable from "./components/AllUsersTable";
+import { redirect } from "next/navigation";
 
 const UserManagementPage = async () => {
   const myAdoptions = await fetch(
@@ -14,7 +15,9 @@ const UserManagementPage = async () => {
 
   const { data: allUsersData } = await myAdoptions.json();
 
-  // console.log(allUsersData);
+  if (!allUsersData) {
+    return redirect("/login");
+  }
 
   return (
     <section className="flex flex-col mx-auto max-w-screen-xl gap-10 pb-4 px-4 sm:px-8 my-auto">

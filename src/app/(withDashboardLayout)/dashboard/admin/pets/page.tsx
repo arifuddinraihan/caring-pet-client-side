@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import AllPetsTable from "./components/AllPetsTable";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const PetsManagementPage = async () => {
   const myAdoptions = await fetch(`${process.env.LOCAL_URL}/pets`, {
@@ -11,7 +12,9 @@ const PetsManagementPage = async () => {
 
   const { data: allPetsData } = await myAdoptions.json();
 
-  // console.log(allPetsData);
+  if (!allPetsData) {
+    return redirect("/login");
+  }
 
   return (
     <section className="flex flex-col mx-auto max-w-screen-xl gap-10 pb-4 px-4 sm:px-8 my-auto">
