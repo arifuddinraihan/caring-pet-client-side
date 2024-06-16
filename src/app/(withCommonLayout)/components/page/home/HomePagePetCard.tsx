@@ -37,7 +37,8 @@ const HomePagePetCard = ({ pet }: any) => {
         <h3 className="text-md text-black">{`${pet.name}
         ${pet.breed}`}</h3>
         <Link
-          href="/pets"
+          href={`/pets/${pet.id}`}
+          // href="/pets"
           className="text-tiny text-white bg-black/20 inline-block py-2 px-4 rounded-xl shadow-md hover:shadow-none"
         >
           Details

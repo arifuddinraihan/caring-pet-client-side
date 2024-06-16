@@ -30,10 +30,12 @@ const HomePagePets = async () => {
         <div className="mt-10">
           <Link
             href="/pets"
+            // href={`pets/${item._id}`}
             className="inline-block py-2 px-4 text-white font-medium bg-gray-800 duration-150 hover:bg-gray-700 active:bg-gray-900 rounded-lg shadow-md hover:shadow-none"
           >
             See more
           </Link>
+          
         </div>
       </div>
     </section>
