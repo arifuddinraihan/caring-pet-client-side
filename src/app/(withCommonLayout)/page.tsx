@@ -5,6 +5,7 @@ import ContactMainPage from "./components/page/home/ContactMainPage";
 import ContactInfoGlobal from "./components/shared/ContactInfoGlobal";
 import HeroSectionMainPage from "./components/page/home/HeroSectionMainPage";
 import TestimonialsMainPage from "./components/page/home/TestimonialsMainPage";
+import HomePagePets from "./components/page/home/HomePagePets";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       {/* <Banner /> */}
       {/* Pet Listing in home page, Dynamic Ui */}
       <StatusMainPage />
+      <HomePagePets />
       <FeatureSection />
       <TestimonialsMainPage />
       <SearchPetCTA />
